@@ -21,6 +21,9 @@ int main(void){
     setWindowResizable(window, false);
     setVsyncEnabled(window, true);
 
+    printf("%s\n", glGetString(GL_VERSION));
+
+    printf("Render loop initialized!\n");
     // Loop
     while(!windowShouldClose(window)) {
         // Do stuff
@@ -28,6 +31,7 @@ int main(void){
         swapBuffers(window);
         pollRenderer();
     }
+    printf("Render loop finished.\n");
 
     stopRenderer();
     destroyWindow(window);

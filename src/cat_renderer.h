@@ -16,7 +16,6 @@ extern "C" {
     void pollRenderer();
 
     // WINDOW
-
     GLFWwindow* createWindow(int width, int height, const char* title);
     void destroyWindow(GLFWwindow* window);
     void makeContextCurrent(GLFWwindow* window);
@@ -36,7 +35,19 @@ extern "C" {
     int getWindowPositionX(GLFWwindow* window);
     int getWindowPositionY(GLFWwindow* window);
 
-    // TIME
+    // RENDERERS
+
+    // UTILS
+    bool fileExists(const char* filePath);
+    unsigned int loadTextureAdvanced(const char* filePath, GLint wrapping, GLint filtering);
+    unsigned int loadTexture(const char* filepath);
+    const char* loadTextFile(const char* filePath);
+    void unloadImage(unsigned int id);
+
+    int getFPS();
+    double getDeltaTime();
+    double getElapsedTime();
+    void updateFrameTime();
 
 
 #ifdef __cplusplus
