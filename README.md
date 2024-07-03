@@ -1,1 +1,1 @@
-A simple and modular glfw renderer program.
+Making a simple cross-platform glfw renderer program.
