@@ -22,6 +22,7 @@ extern "C" {
     bool windowShouldClose(GLFWwindow* window);
     void swapBuffers(GLFWwindow* window);
 
+    void setWindowTitle(GLFWwindow* window, const char* title);
     void setVsyncEnabled(GLFWwindow* window, bool set);
     void setWindowResizable(GLFWwindow* window, bool resizable);
     void setWindowSize(GLFWwindow* window, int width, int height);
@@ -36,6 +37,21 @@ extern "C" {
     int getWindowPositionY(GLFWwindow* window);
 
     // RENDERERS
+
+
+    // SHADERS
+    unsigned int createShader(const char* vertexShader, const char* fragmentShader);
+
+    const char* loadShader(const char* filePath);
+
+    void loadDefaultShaders();
+    void unloadDefaultShaders();
+
+    void useShaderProgram(unsigned int shaderProgram);
+    void useDefaultShapeShaderProgram();
+    void useDefaultTextureShaderProgram();
+
+    unsigned int getCurrentShader();
 
     // UTILS
     bool fileExists(const char* filePath);

@@ -7,7 +7,7 @@ int main(void){
         return -1;
 
     // Init window
-    GLFWwindow* window = createWindow(800, 600, "Test");
+    GLFWwindow* window = createWindow(800, 600, "CATRenderer");
     if(!window) {
         printf("Failed to create window");
     }else{
@@ -24,9 +24,11 @@ int main(void){
     printf("%s\n", glGetString(GL_VERSION));
 
     printf("Render loop initialized!\n");
+    char windowTitle[100];
     // Loop
     while(!windowShouldClose(window)) {
-        // Do stuff
+        sprintf(windowTitle, "CATRenderer (FPS:%d)", getFPS());
+        setWindowTitle(window, windowTitle);
 
         swapBuffers(window);
         pollRenderer();

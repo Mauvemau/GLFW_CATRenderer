@@ -31,5 +31,6 @@ bool initGlad() {
 }
 
 void pollRenderer() {
+    updateFrameTime();
     glfwPollEvents();
 }
