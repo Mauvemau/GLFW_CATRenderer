@@ -27,8 +27,6 @@ int main(void){
     char windowTitle[100];
     // Loop
     while(!windowShouldClose(window)) {
-        sprintf(windowTitle, "CATRenderer (FPS:%d)", getFPS());
-        setWindowTitle(window, windowTitle);
 
         swapBuffers(window);
         pollRenderer();

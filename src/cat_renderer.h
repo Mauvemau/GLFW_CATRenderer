@@ -30,7 +30,6 @@ extern "C" {
     void setWindowPositionCentered(GLFWwindow* window, int positionX, int positionY);
     void centerWindow(GLFWwindow* window);
 
-    const char* getWindowTitle(GLFWwindow* window);
     int getWindowWidth(GLFWwindow* window);
     int getWindowHeight(GLFWwindow* window);
     int getWindowPositionX(GLFWwindow* window);
