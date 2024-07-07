@@ -1,9 +1,6 @@
 #pragma once
 
-#include <stdbool.h>
-
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
+#include "renderer.h"
 
 #ifdef __cplusplus
 extern "C" {

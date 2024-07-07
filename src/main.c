@@ -27,6 +27,8 @@ int main(void){
     char windowTitle[100];
     // Loop
     while(!windowShouldClose(window)) {
+        clearScreen();
+
 
         swapBuffers(window);
         pollRenderer();
