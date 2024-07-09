@@ -19,7 +19,7 @@
     <Filter Include="Source Files\Utils">
       <UniqueIdentifier>{b935ceee-a014-4ff7-8788-06a5e539e2a3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Renderers">
+    <Filter Include="Source Files\Renderer">
       <UniqueIdentifier>{88dcdff7-0c47-4749-bd78-e1c0268ac331}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -33,14 +33,17 @@
     <ClInclude Include="src\glad\include\KHR\khrplatform.h">
       <Filter>Source Files\GLAD</Filter>
     </ClInclude>
-    <ClInclude Include="src\renderers\r_gl.h">
-      <Filter>Source Files\Renderers</Filter>
-    </ClInclude>
     <ClInclude Include="src\utils\linear_alg.h">
       <Filter>Source Files\Utils</Filter>
     </ClInclude>
     <ClInclude Include="src\utils\stb_image.h">
       <Filter>Source Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\renderer\renderer.h">
+      <Filter>Source Files\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\renderer\r_gl.h">
+      <Filter>Source Files\Renderer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -56,12 +59,6 @@
     <ClCompile Include="src\glad\src\glad.c">
       <Filter>Source Files\GLAD</Filter>
     </ClCompile>
-    <ClCompile Include="src\renderers\gl_shader.c">
-      <Filter>Source Files\Renderers</Filter>
-    </ClCompile>
-    <ClCompile Include="src\renderers\r_gl.c">
-      <Filter>Source Files\Renderers</Filter>
-    </ClCompile>
     <ClCompile Include="src\utils\cat_time.c">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
@@ -70,6 +67,15 @@
     </ClCompile>
     <ClCompile Include="src\utils\linear_alg.c">
       <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\renderer\gl_shader.c">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\renderer\renderer.c">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\renderer\r_gl.c">
+      <Filter>Source Files\Renderer</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
