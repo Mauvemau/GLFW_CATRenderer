@@ -4,10 +4,13 @@ project(CR)
 
 file(GLOB_RECURSE SOURCES "src/*.c")
 
-include_directories(src src/glad/include src/renderer src/utils)
-add_executable(CR ${SOURCES})
-
 find_package(OpenGL REQUIRED)
 find_package(glfw3 3.3 REQUIRED)
 
-target_link_libraries(CR PRIVATE ${OPENGL_LIBRARIES} glfw)
+include_directories(src src/glad/include src/renderer src/utils)
+add_executable(CR ${SOURCES})
+
+target_include_directories(CR PRIVATE ${CMAKE_SOURCE_DIR}/lib/cglm-0.9.4/include)
+target_link_directories(CR PRIVATE ${CMAKE_SOURCE_DIR}/lib/cglm-0.9.4/lib)
+
+target_link_libraries(CR PRIVATE ${OPENGL_LIBRARIES} glfw cglm)
