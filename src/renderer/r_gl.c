@@ -2,26 +2,39 @@
 
 #include <stdio.h>
 
+void rglSetUpDefaultVertexAttributes() {
+    
+    // position attribute
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
+    glEnableVertexAttribArray(0);
+    // color attribute
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+    glEnableVertexAttribArray(1);
+    // uv attribute
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+    glEnableVertexAttribArray(2);
+}
+
 unsigned int rglCreateVertexArrayObject() {
     unsigned int VAO;
     glGenVertexArrays(1, &VAO);
     return VAO;
 }
 
-unsigned int rglCreateVertexBufferObject(const float vertexData[], size_t vertexDataSize) {
+unsigned int rglCreateVertexBufferObject(const float vertexData[], size_t bufferSize) {
     unsigned int VBO;
     glGenBuffers(1, &VBO);
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, vertexDataSize, vertexData, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, bufferSize, vertexData, GL_STATIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     return VBO;
 }
 
-unsigned int rglCreateElementBufferObject(const int index[], size_t indexSize) {
+unsigned int rglCreateElementBufferObject(const int index[], size_t bufferSize) {
     unsigned int EBO;
     glGenBuffers(1, &EBO);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, indexSize, index, GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, bufferSize, index, GL_STATIC_DRAW);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
     return EBO;
 }
@@ -32,8 +45,12 @@ RenderData rglCreateRenderData(const float vertexData[], size_t vertexDataSize, 
     rData.VAO = rglCreateVertexArrayObject();
     glBindVertexArray(rData.VAO);
 
-    rData.VBO = rglCreateVertexBufferObject(vertexData, vertexDataSize);
-    rData.EBO = rglCreateElementBufferObject(index, indexSize);
+    rData.VBO = rglCreateVertexBufferObject(vertexData, vertexDataSize * sizeof(float));
+    rData.EBO = rglCreateElementBufferObject(index, indexSize * sizeof(int));
+
+    glBindBuffer(GL_ARRAY_BUFFER, rData.VBO);
+    rglSetUpDefaultVertexAttributes();
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
 
     printf("Render data created! VAO: %i, VBO: %i, EBO: %i.\n", rData.VAO, rData.VBO, rData.EBO);
 
@@ -51,6 +68,7 @@ void rglDestroyRenderData(RenderData rData){
 
 void rglDrawElements(RenderData rData, size_t indexSize){
     glBindVertexArray(rData.VAO);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, rData.EBO);
     glDrawElements(GL_TRIANGLES, indexSize, GL_UNSIGNED_INT, 0);
 
     glBindVertexArray(0);

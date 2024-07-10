@@ -27,7 +27,7 @@ static const char* getShaderType(unsigned int type) {
 	case GL_FRAGMENT_SHADER:
 		return "FRAGMENT SHADER";
 	default:
-		return "UNKNOWN SHADER";
+		return "OTHER SHADER";
 	}
 }
 
@@ -42,13 +42,19 @@ static unsigned int compileShader(unsigned int type, const char* source) {
 	if (result == GL_FALSE) {
 		int length;
 		glGetShaderiv(id, GL_INFO_LOG_LENGTH, &length);
-		char* message = (char*)alloca(length * sizeof(char));
-		glGetShaderInfoLog(id, length, &length, message);
-		printf("(Failed to compile %s Shader) %s\n", (type == GL_VERTEX_SHADER ? "vertex" : "fragment"), message);
+		if (length > 0) {
+			char* message = (char*)alloca(length * sizeof(char));
+			glGetShaderInfoLog(id, length, &length, message);
+			printf("(Failed to compile %s Shader) %s\n", getShaderType(type), message);
+		}
+		else {
+			printf("(Failed to compile %s Shader) Unknown error\n", getShaderType(type));
+		}
 		glDeleteShader(id);
 		return 0;
-	} else {
-		printf("Compiled %s successfully!\n", (type == GL_VERTEX_SHADER ? "vertex" : "fragment"));
+	}
+	else {
+		printf("Compiled %s successfully!\n", getShaderType(type));
 	}
 
 	return id;
@@ -60,15 +66,47 @@ unsigned int createShader(const char* vertexShader, const char* fragmentShader) 
 	unsigned int vs = compileShader(GL_VERTEX_SHADER, vertexShader);
 	unsigned int fs = compileShader(GL_FRAGMENT_SHADER, fragmentShader);
 
+	if (vs == 0 || fs == 0) {
+		printf("Failed to create shader program due to shader compilation error.\n");
+		if (vs != 0) glDeleteShader(vs);
+		if (fs != 0) glDeleteShader(fs);
+		glDeleteProgram(program);
+		return 0;
+	}
+
 	glAttachShader(program, vs);
 	glAttachShader(program, fs);
 	glLinkProgram(program);
+
+	int isLinked;
+	glGetProgramiv(program, GL_LINK_STATUS, &isLinked);
+	if (!isLinked) {
+		int length;
+		glGetProgramiv(program, GL_INFO_LOG_LENGTH, &length);
+		if (length > 0) {
+			char* message = (char*)alloca(length * sizeof(char));
+			glGetProgramInfoLog(program, length, &length, message);
+			printf("Failed to link shader program: %s\n", message);
+		}
+		else {
+			printf("Failed to link shader program: Unknown error\n");
+		}
+		glDeleteProgram(program);
+		return 0;
+	}
+
 	glValidateProgram(program);
 
 	glDeleteShader(vs);
 	glDeleteShader(fs);
 	printf("(%d) Shader program created!\n", program);
 	return program;
+}
+
+void destroyShader(unsigned int program) {
+	printf("(%d) Unloading shader...\n", program);
+	glDeleteProgram(program);
+	printf("Shader unloaded!\n");
 }
 
 const char* loadShader(const char* filePath) {

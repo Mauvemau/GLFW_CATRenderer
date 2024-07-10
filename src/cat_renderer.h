@@ -36,6 +36,7 @@ extern "C" {
 
 
     // SHADERS
+    void destroyShader(unsigned int program);
     unsigned int createShader(const char* vertexShader, const char* fragmentShader);
 
     const char* loadShader(const char* filePath);
