@@ -3,9 +3,9 @@
 #include <stdio.h>
 
 float tVertexData[] = {
-    -0.5f, -0.5f, 0.0f, /**/ 1.0f, 1.0f, 1.0f, /**/ 0.0f, 0.0f,
-     0.0f,  0.5f, 0.0f, /**/ 1.0f, 1.0f, 1.0f, /**/ 1.0f, 0.0f,
-     0.5f, -0.5f, 0.0f, /**/ 1.0f, 1.0f, 1.0f, /**/ 0.0f, 1.0f,
+    -0.5f, -0.5f, 0.0f, /**/ 1.0f, 0.0f, 0.0f, /**/ 0.0f, 0.0f,
+     0.0f,  0.5f, 0.0f, /**/ 0.0f, 1.0f, 0.0f, /**/ 1.0f, 0.0f,
+     0.5f, -0.5f, 0.0f, /**/ 0.0f, 0.0f, 1.0f, /**/ 0.0f, 1.0f,
 };
 unsigned int tIndex[] = {
     0, 1, 2
@@ -32,8 +32,8 @@ int main(void){
 
     printf("%s\n", glGetString(GL_VERSION));
 
-    const char* vertexSource = loadShader("testV.glsl");
-    const char* fragmentSource = loadShader("testF.glsl");
+    const char* vertexSource = loadShader("solidColorV.glsl");
+    const char* fragmentSource = loadShader("solidColorF.glsl");
 
     unsigned int myShaderProgram = createShader(vertexSource, fragmentSource);
     useShaderProgram(myShaderProgram);
