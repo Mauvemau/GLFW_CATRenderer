@@ -32,11 +32,15 @@ int main(void){
 
     printf("%s\n", glGetString(GL_VERSION));
 
-    const char* vertexSource = loadShader("solidColorV.glsl");
-    const char* fragmentSource = loadShader("solidColorF.glsl");
+    const char* vertexSourceA = loadShader("solidColorV.glsl");
+    const char* fragmentSourceA = loadShader("solidColorF.glsl");
+    const char* vertexSourceB = loadShader("texturedV.glsl");
+    const char* fragmentSourceB = loadShader("texturedF.glsl");
+    unsigned int spSolidColor = createShader(vertexSourceA, fragmentSourceA);
+    unsigned int spTextured = createShader(vertexSourceB, fragmentSourceB);
+    useShaderProgram(spSolidColor);
 
-    unsigned int myShaderProgram = createShader(vertexSource, fragmentSource);
-    useShaderProgram(myShaderProgram);
+    unsigned int myTexture = loadTexture("sus.png");
 
     size_t tVertexDataSize = sizeof(tVertexData) / sizeof(tVertexData[0]);
     size_t tIndexSize = sizeof(tIndex) / sizeof(tIndex[0]);
@@ -48,6 +52,7 @@ int main(void){
     while(!windowShouldClose(window)) {
         clearScreen();
 
+        useShaderProgram(spSolidColor);
         rglDrawElements(tData, tIndexSize);
 
         swapBuffers(window);
@@ -55,8 +60,10 @@ int main(void){
     }
     printf("Render loop finished.\n");
 
+    unloadTexture(myTexture);
     rglDestroyRenderData(tData);
-    destroyShader(myShaderProgram);
+    destroyShader(spSolidColor);
+    destroyShader(spTextured);
     stopRenderer();
     destroyWindow(window);
     return 0;

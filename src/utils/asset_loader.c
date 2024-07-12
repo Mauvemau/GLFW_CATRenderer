@@ -132,7 +132,7 @@ const char* loadTextFile(const char* filePath) {
 	return text;
 }
 
-void unloadImage(unsigned int id) {
+void unloadTexture(unsigned int id) {
 	glDeleteTextures(1, &id);
 	printf("Texture (%d) was unloaded!\n", id);
 }

@@ -20,6 +20,7 @@ extern "C" {
     void rglDestroyRenderData(RenderData rData);
 
     void rglDrawElements(RenderData rData, size_t indexSize);
+    void rglDrawTexture(RenderData rData, size_t indexSize, unsigned int textureID);
     void rglClear();
 
 #ifdef __cplusplus

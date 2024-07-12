@@ -68,8 +68,21 @@ void rglDestroyRenderData(RenderData rData){
 void rglDrawElements(RenderData rData, size_t indexSize){
     glBindVertexArray(rData.VAO);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, rData.EBO);
+
     glDrawElements(GL_TRIANGLES, indexSize, GL_UNSIGNED_INT, 0);
 
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+    glBindVertexArray(0);
+}
+
+void rglDrawTexture(RenderData rData, size_t indexSize, unsigned int textureID) {
+    glBindVertexArray(rData.VAO);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, rData.EBO);
+    glBindTexture(GL_TEXTURE_2D, textureID);
+
+    glDrawElements(GL_TRIANGLES, indexSize, GL_UNSIGNED_INT, 0);
+
+    glBindTexture(GL_TEXTURE_2D, 0);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
 }

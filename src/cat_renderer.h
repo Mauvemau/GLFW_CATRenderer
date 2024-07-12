@@ -55,7 +55,7 @@ extern "C" {
     unsigned int loadTextureAdvanced(const char* filePath, GLint wrapping, GLint filtering);
     unsigned int loadTexture(const char* filepath);
     const char* loadTextFile(const char* filePath);
-    void unloadImage(unsigned int id);
+    void unloadTexture(unsigned int id);
 
     int getFPS();
     double getDeltaTime();
