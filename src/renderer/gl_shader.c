@@ -2,7 +2,9 @@
 
 #include <stdio.h>
 #include <malloc.h>
+#ifndef _WIN32
 #include <alloca.h>
+#endif // !_WIN32
 
 const static char* default2DShapeVertexShaderSource =
 	"#version 330 core\n\nlayout (location = 0) in vec4 aPosition;\nlayout (location = 1) in vec4 aColor;\n\nout vec4 fragColor;\n\nuniform mat4 u_MVP;\n\nvoid main()\n{\ngl_Position = u_MVP * aPosition;\nfragColor = aColor;\n}\n";

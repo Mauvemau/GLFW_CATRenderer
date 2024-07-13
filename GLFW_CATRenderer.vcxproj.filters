@@ -42,6 +42,9 @@
     <ClInclude Include="src\renderer\r_gl.h">
       <Filter>Source Files\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="src\utils\linear_alg.h">
+      <Filter>Source Files\Utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\core.c">
@@ -70,6 +73,9 @@
     </ClCompile>
     <ClCompile Include="src\renderer\r_gl.c">
       <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utils\linear_alg.c">
+      <Filter>Source Files\Utils</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
