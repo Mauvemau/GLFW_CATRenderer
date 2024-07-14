@@ -10,4 +10,4 @@ find_package(glfw3 3.3 REQUIRED)
 include_directories(src src/glad/include src/renderer src/utils)
 add_executable(CR ${SOURCES})
 
-target_link_libraries(CR PRIVATE ${OPENGL_LIBRARIES} glfw)
+target_link_libraries(CR PRIVATE ${OPENGL_LIBRARIES} glfw m)
